@@ -17,6 +17,18 @@ import java.util.Map;
 public class QuestionHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
+//        Added CORS headers
+
+        exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
+        exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "POST, OPTIONS");
+        exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type, Authorization");
+
+//        Handle Options preflight request
+        if ("OPTIONS".equalsIgnoreCase(exchange.getRequestMethod())) {
+            exchange.sendResponseHeaders(204, -1); // No content
+            return;
+        }
+
 //      Check request method
         if("Post".equalsIgnoreCase(exchange.getRequestMethod())){
 //            Read the request body
