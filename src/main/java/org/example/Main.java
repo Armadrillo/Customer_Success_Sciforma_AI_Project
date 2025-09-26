@@ -1,0 +1,21 @@
+package org.example;
+
+import com.sun.net.httpserver.HttpHandler;
+import com.sun.net.httpserver.HttpServer;
+
+import javax.naming.Context;
+import java.io.IOException;
+import java.net.InetSocketAddress;
+
+//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+public class Main {
+    public static void main(String[] args) throws IOException {
+        HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
+//        server.createContext("/test", new HandleTest());
+        server.createContext("/question", new QuestionHandler());
+        server.setExecutor(null);
+        server.start();
+        System.out.println("Server running at http://localhost:8080/question");
+    }
+}
